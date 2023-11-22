@@ -1,0 +1,21 @@
+.quotation{
+    font-family: 'Dancing Script', cursive; 
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin: 50px 0;}
+    a {
+        text-decoration: none;
+        color: black;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+  
+      a:hover {
+        background-color: #555;
+      }
+  
