@@ -8,6 +8,8 @@ use App\Models\User;
 use Database\Factories\DepartamentFactory;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use League\Config\Exception\ValidationException;
+use Illuminate\Foundation\Exceptions\Handler;
 
 
 class DepartamentController extends Controller
@@ -35,6 +37,31 @@ class DepartamentController extends Controller
     }
 
     public function addEmployees(Request $request){
+        try {
+            $request->validate([
+                'name'=>'required|string|min:3|max:10',
+                'email'=>'required|email|unique:users,email',
+                'lastName'=>'required|string|min:3|max:10',
+                'birthday'=>'required|date',
+                'address'=>'required|string',
+                'password'=>'required|min:8|max:15',
+                
+                
+              
+              ]);  
+    
+            return response()->json([
+                'status' => 'success',
+                'msg'    => 'Okay',
+            ], 201);
+    
+        } catch (ValidationException $exception) {
+            return response()->json([
+                'status' => 'error',
+                'msg'    => 'Error',
+                
+            ], 422);
+        }
         $users=new User();
         $users->name=$request->input('name');
         $users->name=$request->input('email');
@@ -42,7 +69,7 @@ class DepartamentController extends Controller
         $users->name=$request->input('birthday');
         $users->name=$request->input('address');
         $users->save();
-        return back()->with('success','You have added the data successfully');
+        return back();
         
         
         
@@ -55,7 +82,29 @@ class DepartamentController extends Controller
     }
     public function add(Request $request)
     {   
-        
+      
+
+
+          
+          try {
+            $request->validate([
+                'name'=>'required|string|min:5|max:12',
+                
+              
+              ]);  
+    
+            return response()->json([
+                'status' => 'success',
+                'msg'    => 'Okay',
+            ], 201);
+    
+        } catch (ValidationException $exception) {
+            return response()->json([
+                'status' => 'error',
+                'msg'    => 'Error',
+                
+            ], 422);
+        }
        $department=new Departament();
        $department->name=$request->name;
       
@@ -75,7 +124,25 @@ class DepartamentController extends Controller
     
        public function save_depart(Request $request)
     {   
-        
+        try {
+            $request->validate([
+                'name'=>'required|string|min:5|max:12',
+                
+              
+              ]);  
+    
+            return response()->json([
+                'status' => 'success',
+                'msg'    => 'Okay',
+            ], 201);
+    
+        } catch (ValidationException $exception) {
+            return response()->json([
+                'status' => 'error',
+                'msg'    => 'Error',
+                
+            ], 422);
+        }
        $departments= new Departament();
         $departments = Departament::find($request['id']);
         

@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Departament;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use League\Config\Exception\ValidationException;
+use Illuminate\Foundation\Exceptions\Handler;
 
 class UserController extends Controller
 {
@@ -18,7 +20,31 @@ class UserController extends Controller
     
        public function save_user(Request $request)
     {   
-        
+        try {
+            $request->validate([
+                'name'=>'required|string|min:3|max:10',
+                'email'=>'required|email|unique:users,email',
+                'lastName'=>'required|string|min:3|max:10',
+                'birthday'=>'required|date',
+                'address'=>'required|string',
+                'password'=>'required|min:8|max:15',
+                
+                
+              
+              ]);  
+    
+            return response()->json([
+                'status' => 'success',
+                'msg'    => 'Okay',
+            ], 201);
+    
+        } catch (ValidationException $exception) {
+            return response()->json([
+                'status' => 'error',
+                'msg'    => 'Error',
+                
+            ], 422);
+        }
        
         $users = User::find($request['id']);
         $id_dep =  $users->department_id;
@@ -55,7 +81,34 @@ class UserController extends Controller
        }
        public function insertUsers(Request $request)
     {   
+        try {
+            $request->validate([
+                'name'=>'required|string|min:3|max:10',
+                'email'=>'required|email|unique:users,email',
+                'lastName'=>'required|string|min:3|max:10',
+                'birthday'=>'required|date',
+                'address'=>'required|string',
+                'password'=>'required|min:8|max:15',
+                
+                
+              
+              ]);  
+    
+            return response()->json([
+                'status' => 'success',
+                'msg'    => 'Okay',
+            ], 201);
+    
+        } catch (ValidationException $exception) {
+            return response()->json([
+                'status' => 'error',
+                'msg'    => 'Error',
+                
+            ], 422);
+        }
+      
         
+         
        $users=new User();
        $users->name=$request->name;
        $users->email=$request->email;

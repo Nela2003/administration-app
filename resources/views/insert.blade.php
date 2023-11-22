@@ -9,20 +9,20 @@
                     @csrf
                 
                     <label for="name">First Name:</label>
-                    <input type="text" name="name" value="" required>
+                    <input type="text" name="name" value="" >
                     <input type="hidden" name="id" value="" >
                     
                     <label for="lastName">Last Name:</label>
-                    <input type="text" name="lastName" value="" required>
+                    <input type="text" name="lastName" value="" >
 
                     <label for="email">Email:</label>
-                    <input type="email" name="email" value="" required>
+                    <input type="email" name="email" value="" >
                     <label for="birthday">Birthday:</label>
-                    <input type="date" name="birthday" value="" required>
+                    <input type="date" name="birthday" value="" >
                     <label for="address">Address:</label>
-                    <input type="text" name="address" value="" required>
+                    <input type="text" name="address" value="" >
                     <label for="password">Password:</label>
-                    <input type="password" name="password" value="" required>
+                    <input type="password" name="password" value="" >
                    
 
 
@@ -32,6 +32,15 @@
                    
                     
                 </form>
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             </div>
         </div>
     </div>
